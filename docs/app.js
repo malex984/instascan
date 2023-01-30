@@ -1,4 +1,4 @@
-Vue.prototype.$mylist = ''
+Vue.prototype.$mylist = '';
 
 function download(filename, text) {
     var element = document.createElement('a');
