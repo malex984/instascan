@@ -22,13 +22,15 @@ var app = new Vue({
     activeCameraId: null,
     cameras: [],
     scans: [], 
+    input_num: 9999,
     mylist: ''
   },
   beforeCreate: function () {
-    console.log(this.$mylist)
+//    console.log(this.$mylist);
   },
   created: function() {
-    console.log(this.$mylist)
+//    console.log(this.$mylist);
+//    console.log(this.input_num);
   },
 
   mounted: function () {
@@ -105,7 +107,14 @@ var app = new Vue({
         //    this.myResult = this.myGlobalVar;
 //	filename = (new Date().toISOString()) + '.txt';
 //        download(filename, content);        
+    }, 
+    addInputFunction: function()
+    {
+//        console.log(this.input_num);
+        var content = this.input_num;
+//        console.log(content);
+        this.scans.unshift({ date: +(Date.now()), content: content });
+        this.$mylist = (this.$mylist || '') + content + '\n';
     }
-
   }
 });
