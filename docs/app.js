@@ -1,4 +1,4 @@
-Vue.prototype.$mylist = 'p'
+Vue.prototype.$mylist = ''
 
 function download(filename, text) {
     var element = document.createElement('a');
@@ -13,7 +13,7 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
-const mylist = 'c';
+const mylist = '';
 
 var app = new Vue({
   el: '#app',
@@ -22,7 +22,7 @@ var app = new Vue({
     activeCameraId: null,
     cameras: [],
     scans: [], 
-    mylist: 'd'
+    mylist: ''
   },
   beforeCreate: function () {
     console.log(this.$mylist)
@@ -68,10 +68,10 @@ var app = new Vue({
         
     });
     self.scanner.addListener('scan', function (content, image) {
-      console.log(self.$mylist);
+//      console.log(self.$mylist);
       self.scans.unshift({ date: +(Date.now()), content: content });
-      self.$mylist = self.$mylist + '  ;  ' + content;
-      console.log(self.$mylist);
+      self.$mylist = (self.$mylist || '') + content + '\n';
+//      console.log(self.$mylist);
     });
     Instascan.Camera.getCameras().then(function (cameras) {
       self.cameras = cameras;
@@ -97,15 +97,14 @@ var app = new Vue({
     clickFunction: function () {
         console.log(this.$mylist || '');
 
-        var content = 'my test text: ' + (this.$mylist || '');
+        var content = (this.$mylist);
 	var blob = new Blob([content], {  type: "text/plain;charset=utf-8" });
 	//      FileSaver
 	var filename = (new Date().toISOString()) + '.txt';
         saveAs(blob, filename);
         //    this.myResult = this.myGlobalVar;
-	filename = (new Date().toISOString()) + '.txt';
-        download(filename, content);
-        
+//	filename = (new Date().toISOString()) + '.txt';
+//        download(filename, content);        
     }
 
   }
