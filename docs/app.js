@@ -22,7 +22,7 @@ var app = new Vue({
     activeCameraId: null,
     cameras: [],
     scans: [], 
-    input_num: 9999,
+    input_num: 0,
     mylist: ''
   },
   beforeCreate: function () {
@@ -115,6 +115,8 @@ var app = new Vue({
 //        console.log(content);
         this.scans.unshift({ date: +(Date.now()), content: content });
         this.$mylist = (this.$mylist || '') + content + '\n';
+        this.input_num = 0;
+        
     }
   }
 });
