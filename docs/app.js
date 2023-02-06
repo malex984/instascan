@@ -22,7 +22,7 @@ var app = new Vue({
     activeCameraId: null,
     cameras: [],
     scans: [], 
-    input_num: 0,
+    input_num: '',
     mylist: ''
   },
   beforeCreate: function () {
@@ -65,9 +65,6 @@ var app = new Vue({
   // Only applies to continuous mode. The period, in rendered frames, between scans. A lower scan period
   // increases CPU usage but makes scan response faster. Default 1 (i.e. analyze every frame).
   scanPeriod: 5
-  
-
-        
     });
     self.scanner.addListener('scan', function (content, image) {
 //      console.log(self.$mylist);
@@ -106,7 +103,7 @@ var app = new Vue({
         saveAs(blob, filename);
         //    this.myResult = this.myGlobalVar;
 //	filename = (new Date().toISOString()) + '.txt';
-//        download(filename, content);        
+//        download(filename, content);
     }, 
     addInputFunction: function()
     {
@@ -115,8 +112,7 @@ var app = new Vue({
 //        console.log(content);
         this.scans.unshift({ date: +(Date.now()), content: content });
         this.$mylist = (this.$mylist || '') + content + '\n';
-        this.input_num = 0;
-        
+        this.input_num = '';
     }
   }
 });
